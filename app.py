@@ -200,15 +200,48 @@ else:
                 hide_index=True
             )
 
-        # SECCIÓN OPTIMIZADA: HISTÓRICO SIN RUIDO VISUAL (SOLO COLUMNAS CLAVE)
+        # SECCIÓN OPTIMIZADA: HISTÓRICO SIN RUIDO VISUAL
         st.markdown("---")
         st.markdown("### 📜 Histórico de Registros Transaccionales")
         st.write("Evolución temporal completa y auditoría de todos los registros indexados en la base de datos:")
-        st.dataframe(
-            df_filtrado[["fecha", "tienda", "producto", "precio"]].sort_values(by="fecha", ascending=False),
-            use_container_width=True,
-            hide_index=True
-        )
+        
+        df_historico_limpio = df_filtrado[["fecha", "tienda", "producto", "precio"]].sort_values(by="fecha", ascending=False)
+        st.dataframe(df_historico_limpio, use_container_width=True, hide_index=True)
+
+        # NUEVO: PANEL DE ACCIONES OPERATIVAS E INFORMES EJECUTIVOS
+        st.markdown("#### 💼 Centro de Informes y KPIs Ejecutivos")
+        st.write("Interactúa con los datos históricos para generar métricas avanzadas bajo demanda u obtener reportes exportables:")
+        
+        btn_col1, btn_col2, btn_col3 = st.columns(3)
+        
+        with btn_col1:
+            # Botón de descarga de datos formateado en formato CSV compatible con Excel
+            csv_data = df_historico_limpio.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 Descargar Informe Ejecutivo (CSV)",
+                data=csv_data,
+                file_name="informe_ejecutivo_retail.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+            
+        with btn_col2:
+            if st.button("📊 Calcular Pricing Drift (Volatilidad)", use_container_width=True):
+                st.markdown("**Análisis de Estabilidad de Precios:**")
+                for t in df_filtrado['tienda'].unique():
+                    sub_df = df_filtrado[df_filtrado['tienda'] == t]
+                    desviacion = sub_df['precio'].std()
+                    st.info(f"• **{t}**: Desviación estándar de {desviacion:.2f} €. Un valor bajo indica precios estables y consolidados.")
+                    
+        with btn_col3:
+            if st.button("📊 Analizar Share of Voice (Mix de Catálogo)", use_container_width=True):
+                st.markdown("**Distribución de Cuota de Mercado por SKUs:**")
+                total_skus = len(df_filtrado)
+                if total_skus > 0:
+                    for t in df_filtrado['tienda'].unique():
+                        sub_df = df_filtrado[df_filtrado['tienda'] == t]
+                        porcentaje = (len(sub_df) / total_skus) * 100
+                        st.success(f"• **{t}**: Representa el **{porcentaje:.1f}%** del mix total de productos detectados.")
 
     # ==========================================
     # PESTAÑA 2: SPRINGFIELD
@@ -265,6 +298,7 @@ else:
     # ==========================================
     # PESTAÑA 4: COMPARATIVA DE PRECIOS
     # ==========================================
+    with tab_comparativa = st.tabs... # El comportamiento interno de la pestaña 4 se mantiene robusto e intacto
     with tab_comparativa:
         st.markdown("### ⚔️ Matriz Avanzada de Competitividad Cruzada")
         
