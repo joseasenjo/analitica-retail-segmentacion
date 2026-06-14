@@ -107,7 +107,7 @@ else:
 
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 📘 Documentación Estratégica")
-    st.sidebar.info("Descubre la arquitectura técnica y el modelo de negocio detrás de este cuadro de mando.")
+    st.sidebar.info("Info sobre arquitectura técnica y el modelo de negocio detrás de este cuadro de mando.")
     
     st.sidebar.link_button("Ver Presentación (Pitch Deck) ↗", "https://eduard289.github.io/analitica-retail-segmentacion/presentacion.html")
 
