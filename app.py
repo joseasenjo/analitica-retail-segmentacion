@@ -107,7 +107,7 @@ else:
 
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 📘 Documentación Estratégica")
-    st.sidebar.info("Info sobre arquitectura técnica y el modelo de negocio detrás de este cuadro de mando.")
+    st.sidebar.info("Descubre la arquitectura técnica y el modelo de negocio detrás de este cuadro de mando.")
     
     st.sidebar.link_button("Ver Presentación (Pitch Deck) ↗", "https://eduard289.github.io/analitica-retail-segmentacion/presentacion.html")
 
@@ -241,6 +241,46 @@ else:
                         sub_df = df_filtrado[df_filtrado['tienda'] == t]
                         porcentaje = (len(sub_df) / total_skus) * 100
                         st.success(f"• **{t}**: Representa el **{porcentaje:.1f}%** del mix total de productos detectados.")
+
+        # NUEVA FUNCIÓN IMPLEMENTADA: DRILL-DOWN / ANÁLISIS EVOLUTIVO INDIVIDUAL POR PRODUCTO
+        st.markdown("---")
+        st.markdown("### 🔍 Ficha de Producto: Análisis Evolutivo Individual")
+        st.write("Escribe o selecciona un artículo específico para auditar su histórico transaccional y su curva de precios:")
+        
+        # Extraer lista de productos ordenada alfabéticamente
+        lista_productos = sorted(df_filtrado["producto"].unique().tolist())
+        
+        if lista_productos:
+            prod_seleccionado = st.selectbox("Buscar o seleccionar un producto del catálogo:", lista_productos)
+            
+            # Filtrar los datos exclusivos de este producto cronológicamente
+            df_individual = df_filtrado[df_filtrado["producto"] == prod_seleccionado].sort_values(by="fecha")
+            
+            if not df_individual.empty:
+                f_col1, f_col2 = st.columns([1, 2])
+                
+                with f_col1:
+                    st.markdown(f"**Métricas de Ciclo de Vida**")
+                    ultimo_p = df_individual["precio"].iloc[-1]
+                    min_p = df_individual["precio"].min()
+                    max_p = df_individual["precio"].max()
+                    medio_p = df_individual["precio"].mean()
+                    marca_p = df_individual["tienda"].iloc[0]
+                    
+                    st.metric("Último Precio Registrado", f"{ultimo_p:.2f} €")
+                    st.metric("Mínimo Histórico Detectado", f"{min_p:.2f} €")
+                    st.metric("Máximo Histórico de Salida", f"{max_p:.2f} €")
+                    st.caption(f"• **Firma Comercial**: {marca_p}")
+                    st.caption(f"• **Precio Medio de Campaña**: {medio_p:.2f} €")
+                    
+                with f_col2:
+                    st.markdown("**Curva Temporal de Posicionamiento de Precio**")
+                    df_grafico_ind = df_individual.set_index("fecha")[["precio"]]
+                    
+                    if len(df_grafico_ind) > 1:
+                        st.line_chart(df_grafico_ind)
+                    else:
+                        st.info("📌 Registro base inicial: El pipeline ya está monitorizando este artículo. La gráfica de tendencia se trazará dinámicamente en cuanto se capture una variación de precio en los próximos días.")
 
     # ==========================================
     # PESTAÑA 2: SPRINGFIELD
