@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Intelligence System - Jose Luis Asenjo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #f8f9fa;
+            color: #1a1a1a;
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start;
+            padding: 4rem 10%;
+            position: relative;
+        }
+
+        /* Estilos de fondo alternos */
+        .slide-dark { background-color: #0b192c; color: #ffffff; }
+        .slide-light { background-color: #ffffff; color: #1a1a1a; }
+        .slide-accent { background-color: #f1f5f9; color: #0f172a; }
+
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; text-align: center; line-height: 1.2; }
+        h2 { font-size: 2.5rem; font-weight: 600; margin-bottom: 2rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; }
+        .slide-dark h2 { color: #60a5fa; }
+        p { font-size: 1.25rem; font-weight: 300; line-height: 1.6; max-width: 800px; margin-bottom: 1.5rem; text-align: center; }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .slide-light .card { background: #f8f9fa; border: 1px solid #e5e7eb; }
+
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: inherit; }
+        .card p { font-size: 1rem; text-align: left; margin-bottom: 0; }
+
+        .metric { font-size: 3rem; font-weight: 800; color: #3b82f6; margin-bottom: 0.5rem; }
+        .slide-dark .metric { color: #60a5fa; }
+
+        .footer-note {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.8rem;
+            color: gray;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Indicador de scroll */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="slide-dark">
+        <h2 style="color: white; font-size: 1.5rem; letter-spacing: 4px;">Analítica Retail</h2>
+        <h1>Retail Intelligence System</h1>
+        <p>Benchmarking de Precios y Optimización de Márgenes a través de la Ingeniería de Datos.</p>
+        <p style="font-size: 1rem; margin-top: 2rem; color: #9ca3af;">Desarrollado por Jose Luis Asenjo<br>Retail Data Strategist</p>
+        <div class="scroll-down">↓ Desplazar hacia abajo</div>
+    </section>
+
+    <section class="slide-light">
+        <h2>El Problema del Mercado</h2>
+        <p>La asimetría de información en el sector retail de moda impide una reacción ágil ante los movimientos de la competencia. Los equipos comerciales fijan precios de forma reactiva, perdiendo oportunidades de margen.</p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Visibilidad Nula</h3>
+                <p>Desconocimiento del inventario real y profundidad de catálogo de los competidores.</p>
+            </div>
+            <div class="card">
+                <h3>Pricing Estático</h3>
+                <p>Estrategias de precios que no responden en tiempo real a las fluctuaciones del mercado.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-accent">
+        <h2>La Solución Estratégica</h2>
+        <p>Desarrollo de una arquitectura ETL (Extract, Transform, Load) automatizada que monitoriza el mercado en tiempo real, convirtiendo HTML desestructurado en inteligencia de negocio accionable.</p>
+        <div class="content-grid">
+            <div class="card">
+                <div class="metric">ETL</div>
+                <p>Extracción programada de competidores clave.</p>
+            </div>
+            <div class="card">
+                <div class="metric">BI</div>
+                <p>Dashboard interactivo para la toma de decisiones.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-dark">
+        <h2>Stack Tecnológico</h2>
+        <p>Una infraestructura diseñada para ser ágil, segura y altamente eficiente. Todo el procesamiento de limpieza de datos ocurre dinámicamente en memoria (RAM), maximizando la privacidad comercial.</p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Python (BS4 / Pandas)</h3>
+                <p>Motor de recolección algorítmica y normalización de atributos comerciales complejos.</p>
+            </div>
+            <div class="card">
+                <h3>SQLite</h3>
+                <p>Persistencia ligera y rápida para el almacenamiento del histórico de precios por fecha.</p>
+            </div>
+            <div class="card">
+                <h3>Streamlit</h3>
+                <p>Capa de visualización interactiva y reactiva en Python puro, sin frameworks pesados.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-light">
+        <h2>Métrica Clave I: Posicionamiento</h2>
+        <p>Implementación del <strong>Price Index</strong> competitivo. Esta métrica permite visualizar instantáneamente si una marca está atacando por precio (volumen) o protegiendo su valor percibido (margen).</p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Precio Promedio vs Mediano</h3>
+                <p>Cálculo dual para evitar que productos "Outliers" (muy caros o muy baratos) distorsionen la estrategia real del catálogo analizado.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-accent">
+        <h2>Métrica Clave II: Salud de Inventario</h2>
+        <p>El sistema no solo captura precios, sino que decodifica matrices complejas de stock. Esto permite calcular el <strong>Capital Inmovilizado Estimado</strong> de la competencia.</p>
+        <div class="content-grid">
+            <div class="card">
+                <div class="metric">ROI</div>
+                <p>Multiplicando unidades por talla por el precio de venta actual, revelamos el "Revenue Potencial" de cada categoría.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-dark">
+        <h2>Segmentación Internacional</h2>
+        <p>El proyecto establece un modelo de benchmarking directo: un coloso del <em>Fast-Casual</em> frente a una marca <em>Boutique</em> de expansión rápida.</p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Springfield</h3>
+                <p>Estrategia de penetración, volumen y capilaridad. Análisis de resistencia en márgenes básicos.</p>
+            </div>
+            <div class="card">
+                <h3>Renatta & Go</h3>
+                <p>Agilidad de catálogo, rotación rápida y posicionamiento premium accesible.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-light">
+        <h2>Glosario Estratégico Implementado</h2>
+        <div class="content-grid" style="text-align: left;">
+            <div>
+                <h3 style="color:#3b82f6;">Markdown Opportunity</h3>
+                <p>Identificación matemática de productos con alta disponibilidad y bajo movimiento, ideales para aplicar descuentos quirúrgicos.</p>
+            </div>
+            <div>
+                <h3 style="color:#3b82f6;">Price Elasticity Gap</h3>
+                <p>Brecha analizada en el dashboard que indica la tolerancia del consumidor objetivo a incrementos de precio.</p>
+            </div>
+            <div>
+                <h3 style="color:#3b82f6;">Stock-to-Sales Ratio</h3>
+                <p>Proyección del inventario cruzado con la rotación observada día a día en el pipeline de datos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-accent">
+        <h2>Sensibilidad y Outliers</h2>
+        <p>El dashboard incorpora visualizaciones (Histogramas y Boxplots) diseñadas específicamente para limpiar el "ruido" estadístico. Entender la concentración del 80% de los precios permite establecer el <em>Core Pricing</em> real de la competencia.</p>
+    </section>
+
+    <section class="slide-dark">
+        <h2>Roadmap & Escalabilidad</h2>
+        <p>La arquitectura actual es el cimiento. Las próximas fases del sistema contemplan la integración de modelos predictivos y una mayor abstracción tecnológica.</p>
+        <div class="content-grid">
+            <div class="card">
+                <h3>Dockerización</h3>
+                <p>Contenerización del orquestador para despliegues independientes del sistema operativo.</p>
+            </div>
+            <div class="card">
+                <h3>Autenticación JWT</h3>
+                <p>Integración de JSON Web Tokens para securizar el acceso al dashboard comercial mediante FastAPI.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-light">
+        <h2>El ROI del Dato</h2>
+        <p>Desplegar esta inteligencia comercial reduce el tiempo de investigación de mercado en un 95%, permitiendo a los equipos de pricing enfocar sus recursos en la estrategia, no en la recolección.</p>
+        <h1 style="color: #3b82f6; font-size: 5rem; margin-top: 2rem;">+95%</h1>
+        <p style="font-weight: 600;">Eficiencia Operativa</p>
+    </section>
+
+    <section class="slide-dark">
+        <h2>Retail Intelligence System</h2>
+        <p>Datos transformados en estrategia competitiva.</p>
+        <div style="margin-top: 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem;">
+            <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">Jose Luis Asenjo</h3>
+            <p style="color: #60a5fa; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem;">Retail Data Strategist</p>
+        </div>
+    </section>
+
+</body>
+</html>
