@@ -10,9 +10,16 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2. INYECCIÓN DE ESTILO PARA EL FOOTER FIJO
+# 2. INYECCIÓN DE ESTILO GLOBAL (FUENTE CARDO Y FOOTER)
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap');
+    
+    /* Aplicación de la fuente Cardo a toda la interfaz */
+    html, body, [data-testid="stMarkdownContainer"], .stMetric, .stTabs, button, blockquote {
+        font-family: 'Cardo', serif !important;
+    }
+    
     .footer {
         position: fixed;
         left: 0;
@@ -33,6 +40,17 @@ st.markdown("""
         height: 50px;
         white-space: pre-wrap;
         font-weight: 600;
+    }
+    .live-badge {
+        background-color: #e6f4ea;
+        color: #137333;
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 15px;
+        border: 1px solid #ceead6;
     }
     </style>
     <div class="footer">
@@ -91,11 +109,13 @@ else:
     st.sidebar.markdown("### 📘 Documentación Estratégica")
     st.sidebar.info("Descubre la arquitectura técnica y el modelo de negocio detrás de este cuadro de mando.")
     
-    # Enlace interactivo al Pitch Deck actualizado con tu URL real
     st.sidebar.link_button("Ver Presentación (Pitch Deck) ↗", "https://eduard289.github.io/analitica-retail-segmentacion/presentacion.html")
 
     # --- ENCABEZADO PRINCIPAL ---
     st.title("📊 Retail Price & Stock Intelligence System")
+    
+    # Indicador de datos reales en tiempo real solicitado
+    st.markdown('<div class="live-badge">🟢 Datos Reales • Actualizados en Tiempo Real</div>', unsafe_allow_html=True)
     st.caption("Plataforma de Inteligencia Competitiva para la Optimización de Márgenes y Análisis de Surtido")
 
     # POP-UP MODERNO (GLOSARIO ESTRATÉGICO)
@@ -164,7 +184,6 @@ else:
         st.markdown("---")
         st.markdown("### 📊 Surtido Actual en Paralelo")
         
-        # Separación visual paralela de las dos bases de datos
         col_izq, col_der = st.columns(2)
         with col_izq:
             st.subheader("Catálogo Springfield")
@@ -180,6 +199,16 @@ else:
                 use_container_width=True, 
                 hide_index=True
             )
+
+        # SECCIÓN INCLUIDA: HISTÓRICO DE PRECIOS JUSTO DEBAJO DE LOS CATÁLOGOS
+        st.markdown("---")
+        st.markdown("### 📜 Histórico de Registros Transaccionales")
+        st.write("Evolución temporal completa y auditoría de todos los registros indexados en la base de datos:")
+        st.dataframe(
+            df_filtrado.sort_values(by="fecha", ascending=False),
+            use_container_width=True,
+            hide_index=True
+        )
 
     # ==========================================
     # PESTAÑA 2: SPRINGFIELD
@@ -242,24 +271,21 @@ else:
         if len(tienda_sel) < 2:
             st.info("Selecciona ambas marcas en la barra lateral para activar la matriz comparativa de posicionamiento.")
         else:
-            # Resumen estadístico estructurado para directores comerciales
             resumen_comp = df_filtrado.groupby('tienda')['precio'].agg(['min', 'median', 'mean', 'max', 'std']).rename(
                 columns={
                     'min': 'Precio Entrada (Min)', 
                     'median': 'Precio Mediano', 
                     'mean': 'Precio Promedio', 
                     'max': 'Precio Premium (Max)', 
-                    'std': 'Desviación Estándar'
+                    'std': 'Devviación Estándar'
                 }
             )
             st.table(resumen_comp)
             
             st.markdown("#### 📈 Evolución Histórica / Comparativa Directa de Precios Medios")
-            # Gráfico de barras agregadas para comparar el posicionamiento de marca en paralelo
             df_comp_pivot = df_filtrado.groupby('tienda')['precio'].mean()
             st.bar_chart(df_comp_pivot)
             
-            # Gráfico de líneas preparado para albergar las series temporales históricas
             st.markdown("#### 🕒 Variación Temporal de Precios por Fecha")
             df_evolucion = df_filtrado.groupby(["fecha", "tienda"])["precio"].mean().unstack().fillna(0)
             if len(df_evolucion) > 1:
