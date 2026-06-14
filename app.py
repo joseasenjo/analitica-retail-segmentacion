@@ -114,7 +114,7 @@ else:
     # --- ENCABEZADO PRINCIPAL ---
     st.title("📊 Retail Price & Stock Intelligence System")
     
-    # Indicador de datos reales en tiempo real solicitado
+    # Indicador de datos reales en tiempo real
     st.markdown('<div class="live-badge">🟢 Datos Reales • Actualizados en Tiempo Real</div>', unsafe_allow_html=True)
     st.caption("Plataforma de Inteligencia Competitiva para la Optimización de Márgenes y Análisis de Surtido")
 
@@ -200,12 +200,12 @@ else:
                 hide_index=True
             )
 
-        # SECCIÓN INCLUIDA: HISTÓRICO DE PRECIOS JUSTO DEBAJO DE LOS CATÁLOGOS
+        # SECCIÓN OPTIMIZADA: HISTÓRICO SIN RUIDO VISUAL (SOLO COLUMNAS CLAVE)
         st.markdown("---")
         st.markdown("### 📜 Histórico de Registros Transaccionales")
         st.write("Evolución temporal completa y auditoría de todos los registros indexados en la base de datos:")
         st.dataframe(
-            df_filtrado.sort_values(by="fecha", ascending=False),
+            df_filtrado[["fecha", "tienda", "producto", "precio"]].sort_values(by="fecha", ascending=False),
             use_container_width=True,
             hide_index=True
         )
@@ -277,7 +277,7 @@ else:
                     'median': 'Precio Mediano', 
                     'mean': 'Precio Promedio', 
                     'max': 'Precio Premium (Max)', 
-                    'std': 'Devviación Estándar'
+                    'std': 'Desviación Estándar'
                 }
             )
             st.table(resumen_comp)
