@@ -1,9 +1,7 @@
-# analitica-retail-segmentacion
-Sistema ligero de inteligencia competitiva (ETL y BI). Extrae, procesa en memoria RAM y visualiza datos de precios y stock de competidores retail en tiempo real mediante Python, SQLite y Streamlit.
 
 #  Analítica Retail: Segmentación Internacional
 
-Un ecosistema integral de Inteligencia Competitiva (ETL + BI) diseñado para monitorizar el posicionamiento de precios, la profundidad de catálogo y la disponibilidad de inventario de competidores en el sector retail de moda. 
+He creado un ecosistema RETRAIL DATA STRATEGIC integral de Inteligencia Competitiva (ETL + BI) diseñado para monitorizar el posicionamiento de precios, la profundidad de catálogo y la disponibilidad de inventario de competidores en el sector retail de moda. 
 
 Este proyecto resuelve el problema de la asimetría de información comercial, transformando código HTML desestructurado en un panel de decisiones estratégicas en tiempo real.
 
